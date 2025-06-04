@@ -10,6 +10,10 @@ local opts = {
     null_ls.builtins.formatting.clang_format,
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.prettierd,
+    null_ls.builtins.formatting.rubocop,
+    null_ls.builtins.formatting.djlint.with {
+      extra_args = { "--indent", "2" },
+    },
   },
 
   on_attach = function(client, bufnr)

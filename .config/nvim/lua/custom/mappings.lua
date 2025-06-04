@@ -41,20 +41,6 @@ M.general = {
 }
 
 M.text = {
-  n = {
-    ["<leader>ra"] = {
-      "LSP rename",
-    },
-    ["<leader>rn"] = {
-      function()
-        return ":IncRename " .. vim.fn.expand "<cword>"
-      end,
-      -- ":IncRename "
-      "Rename",
-      opts = { expr = true },
-    },
-  },
-
   v = {
     ["<C-Up>"] = { ":m'<-2<CR>gv=gv", "Move selection up", opts = { silent = true } },
     ["<C-Down>"] = { ":m'>+1<CR>gv=gv", "Move selection down", opts = { silent = true } },

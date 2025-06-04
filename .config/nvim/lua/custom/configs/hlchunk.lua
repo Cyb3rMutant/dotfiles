@@ -33,7 +33,7 @@ hlchunk.setup {
   },
 
   indent = {
-    enable = false,
+    enable = true,
     use_treesitter = false,
     -- You can uncomment to get more indented line look like
     chars = {

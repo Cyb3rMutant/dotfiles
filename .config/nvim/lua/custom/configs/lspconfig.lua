@@ -2,8 +2,32 @@ local base = require "plugins.configs.lspconfig"
 local on_attach = base.on_attach
 local capabilities = base.capabilities
 
+vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
+vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
+
+local border = {
+  { "╭", "FloatBorder" },
+  { "─", "FloatBorder" },
+  { "╮", "FloatBorder" },
+  { "│", "FloatBorder" },
+  { "╯", "FloatBorder" },
+  { "─", "FloatBorder" },
+  { "╰", "FloatBorder" },
+  { "│", "FloatBorder" },
+}
+-- To instead override globally
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or border
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+
+capabilities = {
+  border = border,
+}
+
 local lspconfig = require "lspconfig"
-local util = require "lspconfig/util"
 
 local servers = {
   "pyright",
@@ -13,7 +37,7 @@ local servers = {
   "html",
   "cssls",
   "sqlls",
-  -- "clangd",
+  "clangd",
   "eslint",
   "marksman",
   "jsonls",
@@ -28,47 +52,13 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- lspconfig.pyright.setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
--- }
---
--- lspconfig.clangd.setup {
---   cmd = {
---     "clangd",
---     "--offset-encoding=utf-16",
---   },
---   on_attach = function(client, bufnr)
---     client.server_capabilities.signatureHelpProvider = false
---     on_attach(client, bufnr)
---   end,
--- }
---
--- lspconfig.tsserver.setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
--- }
---
--- lspconfig.html.setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
--- }
---
--- lspconfig.cssls.setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
--- }
---
--- lspconfig.lua_ls.setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
--- }
---
--- lspconfig.bashls.setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
--- }
--- lspconfig.sqlls.setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
--- }
+lspconfig.clangd.setup {
+  cmd = {
+    "clangd",
+    "--offset-encoding=utf-16",
+  },
+  on_attach = function(client, bufnr)
+    client.server_capabilities.signatureHelpProvider = false
+    on_attach(client, bufnr)
+  end,
+}

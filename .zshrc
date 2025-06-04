@@ -171,4 +171,11 @@ python_venv() {
 autoload -U add-zsh-hook
 add-zsh-hook chpwd python_venv
 
-# python_venv
+alias cf="cd /home/yazeed/projects/cruise-frontend; nvim ."
+alias cb="cd /home/yazeed/projects/cruise-backend; nvim ."
+alias t="cd /home/yazeed/projects/tawfiq-register; nvim ."
+alias s="cd /home/yazeed/projects/om-selenium; nvim ."
+alias z="cd /home/yazeed/projects/ourmedia-html; nvim ."
+
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="$PATH:$GEM_HOME/bin"

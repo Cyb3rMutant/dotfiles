@@ -14,12 +14,3 @@ autocmd("LspAttach", {
     client.server_capabilities.semanticTokensProvider = nil
   end,
 })
-
--- Disable colorcolumn in blacklisted filetypes
-autocmd({ "FileType" }, {
-  callback = function()
-    if vim.g.ccenable then
-      vim.opt_local.cc = (vim.tbl_contains(settings.blacklist, vim.bo.ft) and "0" or settings.cc_size)
-    end
-  end,
-})

@@ -54,20 +54,6 @@ local default_plugins = {
   },
 
   {
-    "lukas-reineke/indent-blankline.nvim",
-    version = "2.20.7",
-    event = "User FilePost",
-    opts = function()
-      return require("plugins.configs.others").blankline
-    end,
-    config = function(_, opts)
-      require("core.utils").load_mappings "blankline"
-      dofile(vim.g.base46_cache .. "blankline")
-      require("indent_blankline").setup(opts)
-    end,
-  },
-
-  {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPost", "BufNewFile" },
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
@@ -78,19 +64,6 @@ local default_plugins = {
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "syntax")
       require("nvim-treesitter.configs").setup(opts)
-    end,
-  },
-
-  -- git stuff
-  {
-    "lewis6991/gitsigns.nvim",
-    event = "User FilePost",
-    opts = function()
-      return require("plugins.configs.others").gitsigns
-    end,
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "git")
-      require("gitsigns").setup(opts)
     end,
   },
 
@@ -121,6 +94,7 @@ local default_plugins = {
     event = "User FilePost",
     config = function()
       require "plugins.configs.lspconfig"
+      require "plugins.configs.lspconfigconfig"
     end,
   },
 
@@ -174,14 +148,6 @@ local default_plugins = {
 
   {
     "numToStr/Comment.nvim",
-    keys = {
-      { "gcc", mode = "n", desc = "Comment toggle current line" },
-      { "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
-      { "gc", mode = "x", desc = "Comment toggle linewise (visual)" },
-      { "gbc", mode = "n", desc = "Comment toggle current block" },
-      { "gb", mode = { "n", "o" }, desc = "Comment toggle blockwise" },
-      { "gb", mode = "x", desc = "Comment toggle blockwise (visual)" },
-    },
     init = function()
       require("core.utils").load_mappings "comment"
     end,
@@ -193,6 +159,7 @@ local default_plugins = {
   -- file managing , picker etc
   {
     "nvim-tree/nvim-tree.lua",
+    lazy = false,
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
     init = function()
       require("core.utils").load_mappings "nvimtree"
@@ -228,6 +195,44 @@ local default_plugins = {
     end,
   },
 
+  -- mine
+
+  {
+    "RRethy/vim-illuminate",
+    event = { "CursorHold", "CursorHoldI" },
+    config = function() end,
+  },
+  {
+    "shellRaining/hlchunk.nvim",
+    event = "BufReadPost",
+    config = function()
+      require "plugins.configs.hlchunk"
+    end,
+  },
+  {
+    "kevinhwang91/nvim-hlslens",
+    event = "BufReadPost",
+    config = function()
+      require("hlslens").setup {}
+    end,
+  },
+  {
+    "ahmedkhalf/project.nvim",
+    lazy = false,
+    opts = function()
+      return require "plugins.configs.project"
+    end,
+    config = function(_, opts)
+      require("project_nvim").setup(opts)
+    end,
+  },
+  {
+    "nvimtools/none-ls.nvim",
+    event = "VeryLazy",
+    opts = function()
+      return require "plugins.configs.null-ls"
+    end,
+  },
   -- Only load whichkey after all the gui
   {
     "folke/which-key.nvim",

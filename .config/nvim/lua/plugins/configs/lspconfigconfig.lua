@@ -37,7 +37,6 @@ local servers = {
   "html",
   "cssls",
   "sqlls",
-  "clangd",
   "eslint",
   "marksman",
   "jsonls",
@@ -51,14 +50,3 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
-
-lspconfig.clangd.setup {
-  cmd = {
-    "clangd",
-    "--offset-encoding=utf-16",
-  },
-  on_attach = function(client, bufnr)
-    client.server_capabilities.signatureHelpProvider = false
-    on_attach(client, bufnr)
-  end,
-}

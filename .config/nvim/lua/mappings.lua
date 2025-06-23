@@ -33,7 +33,7 @@ map("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "dont copy replaced text
 map("n", "<tab>", ":BufferLineCycleNext<CR>", { desc = "buffer goto next" })
 map("n", "<S-tab>", ":BufferLineCyclePrev<CR>", { desc = "buffer goto prev" })
 map("n", "<leader>x", function()
-  vim.api.nvim_command "bp|bd#"
+	vim.api.nvim_command("bp|bd#")
 end)
 
 -- Comment
@@ -53,44 +53,44 @@ map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "telescope git 
 map("n", "<leader>pt", "<cmd>Telescope terms<CR>", { desc = "telescope pick hidden term" })
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })
 map(
-  "n",
-  "<leader>fa",
-  "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
-  { desc = "telescope find all files" }
+	"n",
+	"<leader>fa",
+	"<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
+	{ desc = "telescope find all files" }
 )
 
 -- new terminals
 map({ "n", "t" }, "<A-v>", function()
-  require("nvterm.terminal").toggle "vertical"
+	require("nvterm.terminal").toggle("vertical")
 end, { desc = "terminal toggleable vertical term" })
 
 map({ "n", "t" }, "<A-h>", function()
-  require("nvterm.terminal").toggle "horizontal"
+	require("nvterm.terminal").toggle("horizontal")
 end, { desc = "terminal toggleable horizontal term" })
 
 map({ "n", "t" }, "<A-i>", function()
-  require("nvterm.terminal").toggle "float"
+	require("nvterm.terminal").toggle("float")
 end, { desc = "terminal toggle floating term" })
 
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
 
 -- lsp
 map("n", "gd", function()
-  vim.lsp.buf.definition()
+	vim.lsp.buf.definition()
 end, { desc = "Go to definition" })
 
 map("n", "gD", function()
-  vim.lsp.buf.type_definition()
+	vim.lsp.buf.type_definition()
 end, { desc = "Go to type definition" })
 
 map("n", "K", function()
-  vim.lsp.buf.hover()
+	vim.lsp.buf.hover()
 end, { desc = "LSP hover" })
 
 map("n", "gr", function()
-  vim.lsp.buf.references()
+	vim.lsp.buf.references()
 end, { desc = "references" })
 
 map("n", "<leader>lf", function()
-  vim.diagnostic.open_float { border = "rounded" }
+	vim.diagnostic.open_float({ border = "rounded" })
 end, { desc = "diagnostics window" })

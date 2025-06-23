@@ -9,6 +9,7 @@ local options = {
     "bash-language-server",
     "sqlls",
     "codespell",
+    "marksman",
 
     -- lua stuff
     "lua-language-server",
@@ -24,6 +25,8 @@ local options = {
     "css-lsp",
     "html-lsp",
     "djlint",
+    "htmlhint",
+    "curlylint",
 
     -- Json
     "jsonlint",

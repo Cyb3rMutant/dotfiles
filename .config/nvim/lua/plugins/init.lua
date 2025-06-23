@@ -3,7 +3,27 @@
 local default_plugins = {
 
   "nvim-lua/plenary.nvim",
-
+  {
+    "navarasu/onedark.nvim",
+    priority = 1000,
+    config = function()
+      require("onedark").setup {
+        style = "deep",
+      }
+      -- Enable theme
+      require("onedark").load()
+    end,
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "InsertEnter",
+    opts = {
+      bind = true,
+      handler_opts = {
+        border = "rounded",
+      },
+    },
+  },
   {
     "NvChad/base46",
     branch = "v2.0",
@@ -17,35 +37,17 @@ local default_plugins = {
     branch = "v2.0",
     lazy = false,
   },
-
   {
-    "zbirenbaum/nvterm",
-    init = function()
-      require("core.utils").load_mappings "nvterm"
-    end,
-    config = function(_, opts)
-      require "base46.term"
-      require("nvterm").setup(opts)
-    end,
-  },
-
-  {
-    "NvChad/nvim-colorizer.lua",
-    event = "User FilePost",
-    config = function(_, opts)
-      require("colorizer").setup(opts)
-
-      -- execute colorizer as soon as possible
-      vim.defer_fn(function()
-        require("colorizer").attach_to_buffer(0)
-      end, 0)
+    "NvChad/nvterm",
+    config = function()
+      require("nvterm").setup()
     end,
   },
 
   {
     "nvim-tree/nvim-web-devicons",
     opts = function()
-      return { override = require "nvchad.icons.devicons" }
+      return { override = require "plugins.configs.icons.devicons" }
     end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "devicons")
@@ -78,7 +80,7 @@ local default_plugins = {
       dofile(vim.g.base46_cache .. "mason")
       require("mason").setup(opts)
 
-      -- custom nvchad cmd to install all mason binaries listed
+      -- install all mason binaries listed
       vim.api.nvim_create_user_command("MasonInstallAll", function()
         if opts.ensure_installed and #opts.ensure_installed > 0 then
           vim.cmd("MasonInstall " .. table.concat(opts.ensure_installed, " "))
@@ -94,25 +96,14 @@ local default_plugins = {
     event = "User FilePost",
     config = function()
       require "plugins.configs.lspconfig"
-      require "plugins.configs.lspconfigconfig"
     end,
   },
 
-  -- load luasnips + cmp related in insert mode only
+  -- load cmp related in insert mode only
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
-      {
-        -- snippet plugin
-        "L3MON4D3/LuaSnip",
-        dependencies = "rafamadriz/friendly-snippets",
-        opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-        config = function(_, opts)
-          require("plugins.configs.others").luasnip(opts)
-        end,
-      },
-
       -- autopairing of (){}[] etc
       {
         "windwp/nvim-autopairs",
@@ -131,7 +122,6 @@ local default_plugins = {
 
       -- cmp sources plugins
       {
-        "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
@@ -148,9 +138,6 @@ local default_plugins = {
 
   {
     "numToStr/Comment.nvim",
-    init = function()
-      require("core.utils").load_mappings "comment"
-    end,
     config = function(_, opts)
       require("Comment").setup(opts)
     end,
@@ -161,9 +148,6 @@ local default_plugins = {
     "nvim-tree/nvim-tree.lua",
     lazy = false,
     cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-    init = function()
-      require("core.utils").load_mappings "nvimtree"
-    end,
     opts = function()
       return require "plugins.configs.nvimtree"
     end,
@@ -177,21 +161,12 @@ local default_plugins = {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     cmd = "Telescope",
-    init = function()
-      require("core.utils").load_mappings "telescope"
-    end,
     opts = function()
       return require "plugins.configs.telescope"
     end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "telescope")
-      local telescope = require "telescope"
-      telescope.setup(opts)
-
-      -- load extensions
-      for _, ext in ipairs(opts.extensions_list) do
-        telescope.load_extension(ext)
-      end
+      require("telescope").setup(opts)
     end,
   },
 
@@ -210,13 +185,6 @@ local default_plugins = {
     end,
   },
   {
-    "kevinhwang91/nvim-hlslens",
-    event = "BufReadPost",
-    config = function()
-      require("hlslens").setup {}
-    end,
-  },
-  {
     "ahmedkhalf/project.nvim",
     lazy = false,
     opts = function()
@@ -227,19 +195,31 @@ local default_plugins = {
     end,
   },
   {
-    "nvimtools/none-ls.nvim",
-    event = "VeryLazy",
-    opts = function()
-      return require "plugins.configs.null-ls"
+    "stevearc/conform.nvim",
+    event = "BufWritePre", -- uncomment for format on save
+    opts = require "plugins.configs.conform",
+  },
+  {
+    "mfussenegger/nvim-lint",
+    config = function()
+      require "plugins.configs.nvim-lint"
     end,
   },
+  {
+    "akinsho/bufferline.nvim",
+    version = "*",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    lazy = false,
+    config = function()
+      vim.opt.termguicolors = true
+      require("bufferline").setup()
+    end,
+  },
+
   -- Only load whichkey after all the gui
   {
     "folke/which-key.nvim",
     keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
-    init = function()
-      require("core.utils").load_mappings "whichkey"
-    end,
     cmd = "WhichKey",
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "whichkey")
@@ -248,10 +228,4 @@ local default_plugins = {
   },
 }
 
-local config = require("core.utils").load_config()
-
-if #config.plugins > 0 then
-  table.insert(default_plugins, { import = config.plugins })
-end
-
-require("lazy").setup(default_plugins, config.lazy_nvim)
+require("lazy").setup(default_plugins, require "plugins.configs.lazy_nvim")

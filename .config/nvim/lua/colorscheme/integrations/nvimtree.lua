@@ -15,7 +15,7 @@ return {
 	NvimTreeGitIgnored = { fg = colors.light_grey },
 
 	NvimTreeWinSeparator = {
-		fg = "#67bff9",
+		fg = colors.blue,
 	},
 
 	NvimTreeWindowPicker = {

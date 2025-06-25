@@ -11,8 +11,8 @@ return {
 	TelescopeResultsDiffChange = { fg = colors.yellow },
 	TelescopeResultsDiffDelete = { fg = colors.red },
 
-	TelescopeBorder = { fg = colors.one_bg3 },
-	TelescopePromptBorder = { fg = colors.one_bg3 },
+	TelescopeBorder = { fg = colors.blue },
+	TelescopePromptBorder = { fg = colors.blue },
 	TelescopeResultsTitle = { fg = colors.black, bg = colors.green },
 	TelescopePreviewTitle = { fg = colors.black, bg = colors.blue },
 	TelescopePromptPrefix = { fg = colors.red, bg = colors.black },

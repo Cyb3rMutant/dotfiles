@@ -8,7 +8,7 @@ return {
 	},
 
 	["@attribute"] = {
-		fg = theme.base0A,
+		fg = theme.base0F,
 	},
 
 	["@character"] = {

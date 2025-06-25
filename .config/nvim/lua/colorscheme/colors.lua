@@ -55,11 +55,4 @@ M.base_16 = {
 	base0F = "#B78AFF",
 }
 
-M.polish_hl = {
-	treesitter = {
-		["@variable.parameter"] = { fg = M.base_30.pink },
-		["@attribute"] = { fg = M.base_30.purple },
-	},
-}
-
 return M

@@ -10,10 +10,10 @@ map("i", "kj", "<ESC>", { desc = "escape insert mode" })
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<Esc>", "<cmd>noh<CR>", { desc = "general clear highlights" })
 
-map("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "resize left" })
-map("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "resize right" })
-map("n", "<C-Down>", ":resize -2<CR>", { desc = "resize down" })
-map("n", "<C-Up>", ":resize +2<CR>", { desc = "resize up" })
+map("n", "<C-Left>", ":vertical resize +2<CR>", { desc = "resize left" })
+map("n", "<C-Right>", ":vertical resize -2<CR>", { desc = "resize right" })
+map("n", "<C-Down>", ":resize +2<CR>", { desc = "resize down" })
+map("n", "<C-Up>", ":resize -2<CR>", { desc = "resize up" })
 
 map("n", "<C-h>", "<C-w>h", { desc = "switch window left" })
 map("n", "<C-l>", "<C-w>l", { desc = "switch window right" })
@@ -28,10 +28,6 @@ map("v", "<", "<gv", { desc = "indent line" })
 map("v", ">", ">gv", { desc = "indent line" })
 
 map("x", "p", 'p:let @+=@0<CR>:let @"=@0<CR>', { desc = "dont copy replaced text" })
-
--- Comment
-map("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
-map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 
 -- nvimtree
 map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })

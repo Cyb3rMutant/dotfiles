@@ -74,6 +74,7 @@ local servers = {
 	"marksman",
 	"jsonls",
 	"dockerls",
+	"phpactor",
 }
 
 for _, lsp in ipairs(servers) do

@@ -1,5 +1,5 @@
 # no sudo password
-echo "yazeed ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers > /dev/null
+echo "yazeed ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers >/dev/null
 # install apps
 sudo pacman -S --noconfirm firefox git neovim zsh redshift pulseaudio xorg-xinput unzip kitty spectacle fzf ripgrep npm i3blocks picom man tldr pavucontrol feh ttf-dejavu ttf-liberation brightnessctl fd stow
 
@@ -9,7 +9,11 @@ cd yay
 makepkg -si
 cd ..
 rm -rf yay
-yay -S --noconfirm fastfetch zsh-theme-powerlevel10k-git qlipper xkblayout acpi pulseaudio-alsa i3-layouts
+yay -S --noconfirm fastfetch zsh-theme-powerlevel10k zsh-syntax-highlighting zsh-autosuggestions qlipper xkblayout acpi pulseaudio-alsa i3-layouts i3-battery-popup
+
+if [[ -z "expression" ]]; then
+	command ...
+fi
 
 # zsh
 chsh -s $(which zsh)

@@ -5,7 +5,9 @@ local options = {
 		"mypy",
 		"black",
 		"bash-language-server",
+		"shfmt",
 		"sqlls",
+		"markdownlint",
 		"marksman",
 		"stylua",
 
@@ -17,6 +19,9 @@ local options = {
 		"djlint",
 		"htmlhint",
 		"curlylint",
+		"phpactor",
+		"phpcbf",
+		"phpstan",
 
 		-- Json
 		"jsonlint",

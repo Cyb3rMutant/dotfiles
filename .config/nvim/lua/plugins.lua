@@ -1,4 +1,29 @@
 return {
+
+	-- {
+	-- 	"HiPhish/rainbow-delimiters.nvim",
+	-- 	lazy = false,
+	-- 	config = function()
+	-- 		return require("rainbow-delimiters")
+	-- 	end,
+	-- },
+	{
+		"nvim-lualine/lualine.nvim",
+		lazy = false,
+		opts = function()
+			return require("config.lualine")
+		end,
+
+		config = function(_, opts)
+			vim.opt.showmode = false
+			vim.opt.fillchars = vim.tbl_extend("force", vim.opt.fillchars:get(), {
+				stl = "━",
+				stlnc = "━",
+			})
+
+			require("lualine").setup(opts)
+		end,
+	},
 	{
 		"ray-x/lsp_signature.nvim",
 		event = "InsertEnter",
@@ -65,11 +90,23 @@ return {
 		end,
 	},
 
-	-- load cmp related in insert mode only
+	-- load luasnips + cmp related in insert mode only
 	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
+
+			{
+				-- snippet plugin
+				"L3MON4D3/LuaSnip",
+				dependencies = "rafamadriz/friendly-snippets",
+				opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+				config = function(_, opts)
+					require("luasnip").config.set_config(opts)
+					require("config.luasnip")
+				end,
+			},
+
 			-- autopairing of (){}[] etc
 			{
 				"windwp/nvim-autopairs",
@@ -88,6 +125,7 @@ return {
 
 			-- cmp sources plugins
 			{
+				"saadparwaiz1/cmp_luasnip",
 				"hrsh7th/cmp-nvim-lua",
 				"hrsh7th/cmp-nvim-lsp",
 				"hrsh7th/cmp-buffer",

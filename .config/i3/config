@@ -153,6 +153,9 @@ exec --no-startup-id /usr/bin/dunst
 for_window [class="urxvt"] border pixel 1
 
 
+exec --no-startup-id find ~/Downloads -type f -mtime +7 -exec rm {} \;
+
+
 bar {
 	font pango: Comic Code Ligatures 12
 	status_command i3blocks -c ~/.config/i3/i3blocks.conf

@@ -2,7 +2,7 @@ local opt = vim.opt
 local o = vim.o
 
 -------------------------------------- options ------------------------------------------
-opt.laststatus = 0 -- global statusline
+opt.laststatus = 3 -- global statusline
 opt.showmode = false
 
 opt.clipboard = "unnamedplus"
@@ -15,11 +15,9 @@ opt.foldenable = true
 o.statuscolumn = "%=%l%s%C"
 
 -- Indenting
-opt.expandtab = true
 opt.shiftwidth = 4
 opt.smartindent = true
 opt.tabstop = 4
-opt.softtabstop = 4
 
 opt.fillchars = { eob = " " }
 opt.ignorecase = true

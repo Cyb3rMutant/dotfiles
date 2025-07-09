@@ -1,29 +1,5 @@
 return {
 
-	-- {
-	-- 	"HiPhish/rainbow-delimiters.nvim",
-	-- 	lazy = false,
-	-- 	config = function()
-	-- 		return require("rainbow-delimiters")
-	-- 	end,
-	-- },
-	{
-		"nvim-lualine/lualine.nvim",
-		lazy = false,
-		opts = function()
-			return require("config.lualine")
-		end,
-
-		config = function(_, opts)
-			vim.opt.showmode = false
-			vim.opt.fillchars = vim.tbl_extend("force", vim.opt.fillchars:get(), {
-				stl = "━",
-				stlnc = "━",
-			})
-
-			require("lualine").setup(opts)
-		end,
-	},
 	{
 		"ray-x/lsp_signature.nvim",
 		event = "InsertEnter",
@@ -179,13 +155,13 @@ return {
 		event = { "CursorHold", "CursorHoldI" },
 		config = function() end,
 	},
-	{
-		"shellRaining/hlchunk.nvim",
-		event = "BufReadPost",
-		config = function()
-			require("config.hlchunk")
-		end,
-	},
+	-- {
+	-- 	"shellRaining/hlchunk.nvim",
+	-- 	event = "BufReadPost",
+	-- 	config = function()
+	-- 		require("config.hlchunk")
+	-- 	end,
+	-- },
 	{
 		"ahmedkhalf/project.nvim",
 		lazy = false,

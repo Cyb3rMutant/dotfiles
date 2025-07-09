@@ -11,9 +11,6 @@ source $ZSH/oh-my-zsh.sh
 #############################
 bindkey '^H' backward-kill-word
 
-find ~/Downloads -type f -mtime +7 -exec rm {} \;
-
-alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias q='exit'
 alias yaya="yay -Slq | fzf -m --preview 'cat <(yay -Si {1}) <(yay -Fl {1} | awk \"{print \$2}\")' | xargs -ro  yay -S"
 

@@ -163,7 +163,7 @@ return {
 	-- 	end,
 	-- },
 	{
-		"ahmedkhalf/project.nvim",
+		"DrKJeff16/project.nvim",
 		lazy = false,
 		opts = function()
 			return require("config.project")

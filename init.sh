@@ -9,7 +9,7 @@ cd yay
 makepkg -si
 cd ..
 rm -rf yay
-yay -S --noconfirm fastfetch zsh-theme-powerlevel10k zsh-syntax-highlighting zsh-autosuggestions qlipper xkblayout acpi pulseaudio-alsa i3-layouts i3-battery-popup
+yay -S --noconfirm fastfetch zsh-theme-powerlevel10k zsh-syntax-highlighting zsh-autosuggestions clipit-git xkblayout acpi pulseaudio-alsa i3-layouts i3-battery-popup
 
 if [[ -z "expression" ]]; then
 	command ...

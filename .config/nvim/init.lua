@@ -1,6 +1,5 @@
 require("opts")
 require("autocmd")
--- require("colorscheme")
 vim.cmd([[
   highlight Normal guibg=none
   highlight NonText guibg=none

@@ -1,13 +1,13 @@
 c.url.searchengines = {
-    "DEFAULT": "https://google.com/search?hl=en&q={}",
+    "DEFAULT": "https://duckduckgo.com/?q={}",
     "!y": "https://www.youtube.com/results?search_query={}",
-    "!gm": "https://mail.google.com/mail/u/0/#search/{}",
+    # "!gm": "https://mail.google.com/mail/u/0/#search/{}", -- replace with email
     "!m": "https://www.google.com/maps/search/{}",
     "!r": "https://www.reddit.com/search?q={}",
     "!a": "https://www.amazon.com/s?k={}",
     "!w": "https://en.wikipedia.org/wiki/{}",
     "!gh": "https://github.com/search?o=desc&q={}&s=stars",
-    "!gi": "https://www.google.com/search?tbm=isch&q={}&tbs=imgo:1",
+    # "!gi": "https://www.google.com/search?tbm=isch&q={}&tbs=imgo:1", -- replace with duckduckgo images
 }
 
 config.bind("<Ctrl+Up>", "spawn --userscript video_speed.sh increase")

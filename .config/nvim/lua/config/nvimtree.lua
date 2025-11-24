@@ -39,7 +39,7 @@ local options = {
 		update_cwd = true,
 	},
 	view = {
-		width = 20,
+		width = 25,
 	},
 	git = {
 		ignore = false,

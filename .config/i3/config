@@ -129,7 +129,7 @@ bindsym XF86AudioMicMute exec amixer sset Capture toggle
 
 ## App shortcuts
 bindsym $mod+w exec --no-startup-id /usr/bin/firefox
-bindsym --release Print exec spectacle -rbc
+bindsym Print exec spectacle -rbc
 
 # Power Profiles menu switcher (rofi)
 bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
@@ -146,7 +146,7 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id ~/.screenlayout/monitor.sh
 
 # set wallpaper
-exec_always feh --bg-scale ~/Pictures/wallpaper2.jpg
+exec_always feh --bg-scale ~/Pictures/wallpaper.jpg
 
 exec --no-startup-id /usr/bin/dunst
 # set border of floating window
@@ -166,7 +166,7 @@ bar {
 ## rofi bindings fancy application menu ($mod+d /F9 optional disabled)
 bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun -config ~/.config/rofi/rofidmenu.rasi
 
-exec qlipper
+exec clipit
 
 exec i3-battery-popup
 

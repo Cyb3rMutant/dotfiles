@@ -4,6 +4,7 @@ local options = {
 		"pyright",
 		"mypy",
 		"black",
+		"isort",
 		"bash-language-server",
 		"shfmt",
 		"sqlls",

@@ -37,7 +37,9 @@ M.capabilities.textDocument.completion.completionItem = {
 	},
 }
 
-require("lspconfig").lua_ls.setup({
+local lspconfig = require("lspconfig")
+
+lspconfig.lua_ls.setup({
 	on_init = M.on_init,
 	on_attach = M.on_attach,
 	capabilities = M.capabilities,
@@ -60,10 +62,20 @@ require("lspconfig").lua_ls.setup({
 	},
 })
 
-local lspconfig = require("lspconfig")
+lspconfig.pyright.setup({
+	capabilities = M.capabilities,
+	on_attach = M.on_attach,
+	settings = {
+		python = {
+			analysis = {
+				extraPaths = { "../frappe" },
+			},
+		},
+	},
+})
 
 local servers = {
-	"pyright",
+	-- "pyright",
 	"ts_ls",
 	"tailwindcss",
 	"bashls",

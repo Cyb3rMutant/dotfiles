@@ -1,4 +1,25 @@
 return {
+	{
+		"amitds1997/remote-nvim.nvim",
+		version = "*", -- Pin to GitHub releases
+		dependencies = {
+			"nvim-lua/plenary.nvim", -- For standard functions
+			"MunifTanjim/nui.nvim", -- To build the plugin UI
+			"nvim-telescope/telescope.nvim", -- For picking b/w different remote methods
+		},
+		config = true,
+	},
+	{
+		"iamcco/markdown-preview.nvim",
+		ft = "markdown",
+		build = ":call mkdp#util#install()",
+	},
+	{
+		"NMAC427/guess-indent.nvim",
+		config = function()
+			require("guess-indent").setup({})
+		end,
+	},
 
 	{
 		"ray-x/lsp_signature.nvim",
@@ -155,13 +176,6 @@ return {
 		event = { "CursorHold", "CursorHoldI" },
 		config = function() end,
 	},
-	-- {
-	-- 	"shellRaining/hlchunk.nvim",
-	-- 	event = "BufReadPost",
-	-- 	config = function()
-	-- 		require("config.hlchunk")
-	-- 	end,
-	-- },
 	{
 		"DrKJeff16/project.nvim",
 		lazy = false,
@@ -169,7 +183,7 @@ return {
 			return require("config.project")
 		end,
 		config = function(_, opts)
-			require("project_nvim").setup(opts)
+			require("project").setup(opts)
 		end,
 	},
 	{

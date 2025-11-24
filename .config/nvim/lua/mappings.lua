@@ -44,13 +44,13 @@ map(
 	"<cmd>Telescope buffers sort_mru=true initial_mode=normal<CR>",
 	{ desc = "telescope find buffers" }
 )
-map("n", "<leader>cm", "<cmd>Telescope git_commits<CR>", { desc = "telescope git commits" })
-map("n", "<leader>gt", "<cmd>Telescope git_status<CR>", { desc = "telescope git status" })
+map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "telescope git commits" })
+map("n", "<leader>gs", "<cmd>Telescope git_status<CR>", { desc = "telescope git status" })
 map("n", "<leader>f", "<cmd>Telescope find_files<cr>", { desc = "telescope find files" })
 map(
 	"n",
 	"<leader>a",
-	"<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
+	"<cmd>Telescope live_grep follow=true no_ignore=true hidden=true<CR>",
 	{ desc = "telescope find all files" }
 )
 

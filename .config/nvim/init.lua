@@ -38,4 +38,5 @@ require("lazy").setup({
 	},
 })
 
+require("lsp")
 require("mappings")

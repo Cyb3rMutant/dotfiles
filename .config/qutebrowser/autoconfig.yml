@@ -8,3 +8,10 @@ config_version: 2
 settings:
   auto_save.session:
     global: true
+  content.geolocation:
+    https://www.speedtest.net: true
+  content.javascript.clipboard:
+    https://login.tailscale.com: access-paste
+    https://www.golinuxcloud.com: access-paste
+  content.register_protocol_handler:
+    https://mail.proton.me#mailto=%25s: true

@@ -81,10 +81,6 @@ return {
 
 	{
 		"neovim/nvim-lspconfig",
-		event = "User FilePost",
-		config = function()
-			require("config.lspconfig")
-		end,
 	},
 
 	-- load luasnips + cmp related in insert mode only

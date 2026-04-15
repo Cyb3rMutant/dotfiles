@@ -68,6 +68,8 @@ map({ "n", "t" }, "<A-i>", function()
 end, { desc = "terminal toggle floating term" })
 
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
+map("t", "<A-c>", "<cmd>ClaudeCode<CR>", { desc = "toggle claude code" })
+
 
 -- lsp
 map("n", "gd", function()

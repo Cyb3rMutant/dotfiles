@@ -2,7 +2,9 @@ local options = {
 	active = true,
 	on_config_done = nil,
 	manual_mode = false,
-	use_lsp = true,
+	lsp = {
+		enabled = true,
+	},
 	patterns = {
 		".git",
 		"Makefile",
@@ -13,7 +15,6 @@ local options = {
 	},
 	show_hidden = false,
 	silent_chdir = true,
-	ignore_lsp = {},
 	datapath = vim.fn.stdpath("data"),
 }
 

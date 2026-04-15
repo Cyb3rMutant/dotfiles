@@ -14,6 +14,7 @@ opt.wrap = false
 opt.foldenable = true
 o.statuscolumn = "%=%l%s%C"
 o.colorcolumn = "88"
+o.winborder = "rounded"
 
 -- Indenting
 opt.shiftwidth = 4

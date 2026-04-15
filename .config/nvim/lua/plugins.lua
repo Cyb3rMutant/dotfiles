@@ -1,13 +1,15 @@
 return {
 	{
-		"amitds1997/remote-nvim.nvim",
-		version = "*", -- Pin to GitHub releases
+		"greggh/claude-code.nvim",
 		dependencies = {
-			"nvim-lua/plenary.nvim", -- For standard functions
-			"MunifTanjim/nui.nvim", -- To build the plugin UI
-			"nvim-telescope/telescope.nvim", -- For picking b/w different remote methods
+			"nvim-lua/plenary.nvim", -- Required for git operations
 		},
-		config = true,
+		opts = function()
+			return require("config.claude-code")
+		end,
+		config = function(_, opts)
+			require("claude-code").setup(opts)
+		end,
 	},
 	{
 		"iamcco/markdown-preview.nvim",
@@ -47,14 +49,30 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		lazy = false,
 		event = { "BufReadPost", "BufNewFile" },
 		cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
-		build = ":TSUpdate",
-		opts = function()
-			return require("config.treesitter")
-		end,
-		config = function(_, opts)
-			require("nvim-treesitter.configs").setup(opts)
+		build = ":TSUpdate | TSInstallAll",
+		config = function()
+			require("nvim-treesitter").install({
+				"vim",
+				"lua",
+				"vimdoc",
+				"bash",
+				"json",
+				"json5",
+				"yaml",
+				"dockerfile",
+				"regex",
+				"markdown",
+				"markdown_inline",
+				"javascript",
+				"typescript",
+				"tsx",
+				"html",
+				"astro",
+			})
 		end,
 	},
 

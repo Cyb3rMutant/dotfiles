@@ -11,6 +11,7 @@ local options = {
 		"markdownlint",
 		"marksman",
 		"stylua",
+		"lua-language-server",
 
 		-- web dev stuff
 		"prettierd",

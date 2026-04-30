@@ -1,222 +1,80 @@
-return {
-	{
-		"greggh/claude-code.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim", -- Required for git operations
-		},
-		opts = function()
-			return require("config.claude-code")
-		end,
-		config = function(_, opts)
-			require("claude-code").setup(opts)
-		end,
-	},
-	{
-		"iamcco/markdown-preview.nvim",
-		ft = "markdown",
-		build = ":call mkdp#util#install()",
-	},
-	{
-		"NMAC427/guess-indent.nvim",
-		config = function()
-			require("guess-indent").setup({})
-		end,
-	},
+local gh = function(x)
+	return "https://github.com/" .. x
+end
 
-	{
-		"ray-x/lsp_signature.nvim",
-		event = "InsertEnter",
-		opts = {
-			bind = true,
-			handler_opts = {
-				border = "rounded",
-			},
-		},
-	},
-	{
-		"NvChad/nvterm",
-		config = function()
-			require("nvterm").setup()
-		end,
-	},
+vim.pack.add({
+	gh("nvim-lua/plenary.nvim"),
+	gh("greggh/claude-code.nvim"),
+	gh("ray-x/lsp_signature.nvim"),
+	gh("nvim-tree/nvim-web-devicons"),
+	gh("neovim/nvim-lspconfig"),
+	gh("numToStr/Comment.nvim"),
+	gh("RRethy/vim-illuminate"),
+	gh("DrKJeff16/project.nvim"),
+	gh("stevearc/conform.nvim"),
+	gh("mfussenegger/nvim-lint"),
+	gh("folke/which-key.nvim"),
+	gh("nvim-treesitter/nvim-treesitter"),
+	gh("williamboman/mason.nvim"),
+	gh("L3MON4D3/LuaSnip"),
+	gh("rafamadriz/friendly-snippets"),
+	gh("windwp/nvim-autopairs"),
+	gh("hrsh7th/nvim-cmp"),
+	gh("saadparwaiz1/cmp_luasnip"),
+	gh("hrsh7th/cmp-nvim-lua"),
+	gh("hrsh7th/cmp-nvim-lsp"),
+	gh("hrsh7th/cmp-buffer"),
+	gh("hrsh7th/cmp-path"),
+	gh("nvim-tree/nvim-tree.lua"),
+	gh("nvim-telescope/telescope.nvim"),
+})
 
-	{
-		"nvim-tree/nvim-web-devicons",
-		config = function()
-			require("nvim-web-devicons").setup()
-		end,
-	},
+require("claude-code").setup(require("config.claude-code"))
+require("lsp_signature").setup({ bind = true, handler_opts = { border = "rounded" } })
+require("nvim-web-devicons").setup()
+require("Comment").setup()
+require("project").setup(require("config.project"))
+require("conform").setup(require("config.conform"))
+require("config.nvim-lint")
+require("which-key").setup()
 
-	{
-		"nvim-treesitter/nvim-treesitter",
-		branch = "main",
-		lazy = false,
-		event = { "BufReadPost", "BufNewFile" },
-		cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
-		build = ":TSUpdate | TSInstallAll",
-		config = function()
-			require("nvim-treesitter").install({
-				"vim",
-				"lua",
-				"vimdoc",
-				"bash",
-				"json",
-				"json5",
-				"yaml",
-				"dockerfile",
-				"regex",
-				"markdown",
-				"markdown_inline",
-				"javascript",
-				"typescript",
-				"tsx",
-				"html",
-				"astro",
-			})
-		end,
-	},
+require("nvim-treesitter").install({
+	"vim",
+	"python",
+	"lua",
+	"vimdoc",
+	"bash",
+	"json",
+	"json5",
+	"yaml",
+	"dockerfile",
+	"regex",
+	"markdown",
+	"markdown_inline",
+	"javascript",
+	"typescript",
+	"tsx",
+	"html",
+	"astro",
+})
 
-	-- lsp stuff
-	{
-		"williamboman/mason.nvim",
-		cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
-		opts = function()
-			return require("config.mason")
-		end,
-		config = function(_, opts)
-			require("mason").setup(opts)
+local mason_opts = require("config.mason")
+require("mason").setup(mason_opts)
+vim.api.nvim_create_user_command("MasonInstallAll", function()
+	if mason_opts.ensure_installed and #mason_opts.ensure_installed > 0 then
+		vim.cmd("MasonInstall " .. table.concat(mason_opts.ensure_installed, " "))
+	end
+end, {})
+vim.g.mason_binaries_list = mason_opts.ensure_installed
 
-			-- install all mason binaries listed
-			vim.api.nvim_create_user_command("MasonInstallAll", function()
-				if opts.ensure_installed and #opts.ensure_installed > 0 then
-					vim.cmd("MasonInstall " .. table.concat(opts.ensure_installed, " "))
-				end
-			end, {})
+require("luasnip").config.set_config({ history = true, updateevents = "TextChanged,TextChangedI" })
+require("config.luasnip")
 
-			vim.g.mason_binaries_list = opts.ensure_installed
-		end,
-	},
+local autopairs = require("nvim-autopairs")
+autopairs.setup({ fast_wrap = {}, disable_filetype = { "TelescopePrompt", "vim" } })
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+require("cmp").setup(require("config.cmp"))
 
-	{
-		"neovim/nvim-lspconfig",
-	},
-
-	-- load luasnips + cmp related in insert mode only
-	{
-		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
-		dependencies = {
-
-			{
-				-- snippet plugin
-				"L3MON4D3/LuaSnip",
-				dependencies = "rafamadriz/friendly-snippets",
-				opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-				config = function(_, opts)
-					require("luasnip").config.set_config(opts)
-					require("config.luasnip")
-				end,
-			},
-
-			-- autopairing of (){}[] etc
-			{
-				"windwp/nvim-autopairs",
-				opts = {
-					fast_wrap = {},
-					disable_filetype = { "TelescopePrompt", "vim" },
-				},
-				config = function(_, opts)
-					require("nvim-autopairs").setup(opts)
-
-					-- setup cmp for autopairs
-					local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-					require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
-				end,
-			},
-
-			-- cmp sources plugins
-			{
-				"saadparwaiz1/cmp_luasnip",
-				"hrsh7th/cmp-nvim-lua",
-				"hrsh7th/cmp-nvim-lsp",
-				"hrsh7th/cmp-buffer",
-				"hrsh7th/cmp-path",
-			},
-		},
-		opts = function()
-			return require("config.cmp")
-		end,
-		config = function(_, opts)
-			require("cmp").setup(opts)
-		end,
-	},
-
-	{
-		"numToStr/Comment.nvim",
-		config = function(_, opts)
-			require("Comment").setup(opts)
-		end,
-	},
-
-	-- file managing , picker etc
-	{
-		"nvim-tree/nvim-tree.lua",
-		lazy = false,
-		cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-		opts = function()
-			return require("config.nvimtree")
-		end,
-		config = function(_, opts)
-			require("nvim-tree").setup(opts)
-		end,
-	},
-
-	{
-		"nvim-telescope/telescope.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		cmd = "Telescope",
-		opts = function()
-			return require("config.telescope")
-		end,
-		config = function(_, opts)
-			require("telescope").setup(opts)
-		end,
-	},
-
-	-- mine
-
-	{
-		"RRethy/vim-illuminate",
-		event = { "CursorHold", "CursorHoldI" },
-		config = function() end,
-	},
-	{
-		"DrKJeff16/project.nvim",
-		lazy = false,
-		opts = function()
-			return require("config.project")
-		end,
-		config = function(_, opts)
-			require("project").setup(opts)
-		end,
-	},
-	{
-		"stevearc/conform.nvim",
-		event = "BufWritePre",
-		opts = require("config.conform"),
-	},
-	{
-		"mfussenegger/nvim-lint",
-		config = function()
-			require("config.nvim-lint")
-		end,
-	},
-	{
-		"folke/which-key.nvim",
-		keys = { "<leader>", "<c-r>", "<c-w>", '"', "'", "`", "c", "v", "g" },
-		cmd = "WhichKey",
-		config = function(_, opts)
-			require("which-key").setup(opts)
-		end,
-	},
-}
+require("nvim-tree").setup(require("config.nvimtree"))
+require("telescope").setup(require("config.telescope"))

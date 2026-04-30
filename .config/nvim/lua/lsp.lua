@@ -8,8 +8,8 @@ vim.lsp.config("lua_ls", {
 				library = {
 					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
 					[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-					[vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
 				},
+
 				maxPreload = 100000,
 				preloadFileSize = 10000,
 			},
@@ -20,6 +20,8 @@ vim.lsp.config("pyright", {
 	settings = {
 		python = {
 			analysis = {
+				logLevel = "Warning",
+				diagnosticMode = "workspace",
 				extraPaths = { "../frappe" },
 			},
 		},

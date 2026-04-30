@@ -56,20 +56,19 @@ map(
 
 -- new terminals
 map({ "n", "t" }, "<A-v>", function()
-	require("nvterm.terminal").toggle("vertical")
+	require("term").toggle({ pos = "vsp", id = "vtoggleTerm" })
 end, { desc = "terminal toggleable vertical term" })
 
 map({ "n", "t" }, "<A-h>", function()
-	require("nvterm.terminal").toggle("horizontal")
+	require("term").toggle({ pos = "sp", id = "htoggleTerm" })
 end, { desc = "terminal toggleable horizontal term" })
 
 map({ "n", "t" }, "<A-i>", function()
-	require("nvterm.terminal").toggle("float")
+	require("term").toggle({ pos = "float", id = "floatTerm" })
 end, { desc = "terminal toggle floating term" })
 
 map("t", "<C-x>", "<C-\\><C-N>", { desc = "terminal escape terminal mode" })
 map("t", "<A-c>", "<cmd>ClaudeCode<CR>", { desc = "toggle claude code" })
-
 
 -- lsp
 map("n", "gd", function()

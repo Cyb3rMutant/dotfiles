@@ -24,6 +24,7 @@ local options = {
 		"phpactor",
 		"phpcbf",
 		"phpstan",
+		"tailwindcss-language-server",
 
 		-- Json
 		"jsonlint",

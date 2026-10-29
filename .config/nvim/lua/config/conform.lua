@@ -8,6 +8,9 @@ local opts = {
 		bash = { "shfmt" },
 		markdown = { "markdownlint" },
 		php = { "phpcbf" },
+		c = { "clang-format" },
+		cpp = { "clang-format" },
+		latex = { "tex-fmt" },
 	},
 	formatters = {
 		djlint = {

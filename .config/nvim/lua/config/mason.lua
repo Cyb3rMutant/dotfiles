@@ -1,6 +1,10 @@
 local options = {
 	ensure_installed = {
 		-- mine
+		"cpptools",
+		"cpplint",
+		"clangd",
+		"clang-format",
 		"pyright",
 		"mypy",
 		"black",
@@ -12,6 +16,10 @@ local options = {
 		"marksman",
 		"stylua",
 		"lua-language-server",
+		"typescript-language-server",
+		"vale",
+		"tex-fmt",
+		"ltex-ls-plus",
 
 		-- web dev stuff
 		"prettierd",

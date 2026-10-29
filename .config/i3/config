@@ -88,10 +88,10 @@ bindsym $mod+Shift+q kill
 # exit-menu
 bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/scripts/powermenu
 
-# # Lock the system
-# bindsym $mod+Shift+x exec --no-startup-id ~/.config/i3/scripts/blur-lock
-# # lock in case after sleep
-# exec --no-startup-id xss-lock -l ~/.config/i3/scripts/blur-lock
+# Lock the system
+bindsym $mod+Shift+x exec --no-startup-id ~/.config/i3/scripts/blur-lock
+# lock in case after sleep
+exec --no-startup-id xss-lock -l ~/.config/i3/scripts/blur-lock
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -135,6 +135,7 @@ bindsym Print exec spectacle -rbc
 bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
 
 exec_always --no-startup-id picom -b
+exec_always --no-startup-id ~/screen.sh
 
 #get auth work with polkit-gnome
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -179,10 +180,10 @@ exec_always setxkbmap -layout us,ara -option 'grp:alt_shift_toggle'
 exec_always libinput-gestures-setup start
 
 # touchpad settings
-exec_always xinput set-prop $(xinput list --id-only "ELAN0678:00 04F3:3195 Touchpad") "libinput Tapping Enabled" 1
-exec_always xinput set-prop $(xinput list --id-only "ELAN0678:00 04F3:3195 Touchpad") "libinput Tapping Drag Enabled" 1
-exec_always xinput set-prop $(xinput list --id-only "ELAN0678:00 04F3:3195 Touchpad") "libinput Natural Scrolling Enabled" 1
-exec_always xinput set-prop $(xinput list --id-only "ELAN0678:00 04F3:3195 Touchpad") "libinput Accel Speed" 1
+exec_always xinput set-prop $(xinput list --id-only "SYNA8022:00 06CB:CE67 Touchpad") "libinput Tapping Enabled" 1
+exec_always xinput set-prop $(xinput list --id-only "SYNA8022:00 06CB:CE67 Touchpad") "libinput Tapping Drag Enabled" 1
+exec_always xinput set-prop $(xinput list --id-only "SYNA8022:00 06CB:CE67 Touchpad") "libinput Natural Scrolling Enabled" 1
+exec_always xinput set-prop $(xinput list --id-only "SYNA8022:00 06CB:CE67 Touchpad") "libinput Accel Speed" 1
 
 # i3 layouts
 

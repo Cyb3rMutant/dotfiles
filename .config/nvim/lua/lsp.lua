@@ -16,6 +16,25 @@ vim.lsp.config("lua_ls", {
 		},
 	},
 })
+vim.lsp.config("clangd", {
+	cmd = {
+		"clangd",
+		-- cross builds (codal/micro:bit) record arm-none-eabi-g++ in
+		-- compile_commands.json; let clangd interrogate that driver for its
+		-- system headers instead of falling back to the host ones
+		"--query-driver=/usr/bin/arm-none-eabi-*,/usr/bin/gcc,/usr/bin/g++",
+		"--background-index",
+		"--completion-style=detailed",
+		"--header-insertion=never",
+		"--function-arg-placeholders",
+		"--offset-encoding=utf-16",
+	},
+	-- used for files the compile database does not cover
+	init_options = {
+		fallbackFlags = { "-std=c++11" },
+	},
+})
+
 vim.lsp.config("pyright", {
 	settings = {
 		python = {
@@ -34,6 +53,7 @@ vim.lsp.enable("lua_ls")
 vim.lsp.enable("pyright")
 
 vim.lsp.enable({
+	"clangd",
 	"lua_ls",
 	"pyright",
 	"ts_ls",
@@ -47,6 +67,7 @@ vim.lsp.enable({
 	"jsonls",
 	"dockerls",
 	"phpactor",
+	"ltex-ls-plus",
 })
 
 vim.diagnostic.config({

@@ -40,6 +40,8 @@ require("which-key").setup()
 
 require("nvim-treesitter").install({
 	"vim",
+	"c",
+	"cpp",
 	"python",
 	"lua",
 	"vimdoc",
@@ -56,6 +58,7 @@ require("nvim-treesitter").install({
 	"tsx",
 	"html",
 	"astro",
+	"latex",
 })
 
 local mason_opts = require("config.mason")
